@@ -3,10 +3,13 @@ import jieba
 
 def import_file(file_name):
     """输入一个文件名，将其内容以字符串形式返回"""
-    file = open(file_name, "r", encoding="utf-8")
-    file_text = file.read()
-    file.close()
-    return file_text
+    try:
+        file = open(file_name, "r", encoding="utf-8")
+        file_text = file.read()
+        file.close()
+        return file_text
+    except IOError as e:
+        print(e)
 
 
 def jieba_cut(mystr):
