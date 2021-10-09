@@ -21,17 +21,21 @@ def jieba_cut(mystr):
     return mylist
 
 
+invalid_words_list = [',', ' ', '.', '。', '，', '(', '"', ')',
+                      '\'', '_', ':', '：', '“', '‘', '\n', '、']
+
+
 def merge_words(list1, list2):
     """将两个分词后得到的列表不重复地合并成一个列表"""
     new_list = []
     for i in range(len(list1)):
-        if list1[i] not in new_list:
+        if list1[i] not in new_list and list1[i] not in invalid_words_list:
             new_list.append(list1[i])
 
     for j in range(len(list2)):
-        if list2[j] not in new_list:
+        if list2[j] not in new_list and list2[j] not in invalid_words_list:
             new_list.append(list2[j])
-    # print("new_list = " + str(new_list))
+    print("new_list = " + str(new_list))
     return new_list
 
 
@@ -44,11 +48,12 @@ def get_vector(file_words_list, merged_list):
         my_dict[merged_list[i]] = 0
 
     for j in range(len(file_words_list)):
-        my_dict[file_words_list[j]] = my_dict[file_words_list[j]] + 1
+        if file_words_list[j] not in invalid_words_list:
+            my_dict[file_words_list[j]] = my_dict[file_words_list[j]] + 1
 
     for k in range(len(merged_list)):
         vector.append(my_dict[merged_list[k]])
-    # print(vector)
+    print(vector)
     return vector
 
 
