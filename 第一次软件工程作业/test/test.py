@@ -14,9 +14,8 @@ def test1():
               cal.cal_sim_cosine("测试文本\\orig.txt", "测试文本\\orig_0.8_dis_15.txt"),
               ]
 
-    result_file.write("测试结果接近，不保留两位小数\n")
     for i in range(len(result)):
-        result_file.write(str(result[i]) + "\n")
+        result_file.write(str(round(result[i], 2)) + "  " + str(result[i]) + "\n")
 
     result_file.close()
 
@@ -26,7 +25,7 @@ def test2():
 
     result = cal.cal_sim_cosine("test.py", "测试文本\\orig_0.8_del.txt")
 
-    result_file.write(str(result) + "\n")
+    result_file.write(str(round(result, 2)) + "  " + str(result) + "\n")
     result_file.close()
 
 
