@@ -35,7 +35,7 @@ def merge_words(list1, list2):
     for j in range(len(list2)):
         if list2[j] not in new_list and list2[j] not in invalid_words_list:
             new_list.append(list2[j])
-    print("new_list = " + str(new_list))
+    print("merged_list = " + str(new_list))
     return new_list
 
 
@@ -53,7 +53,7 @@ def get_vector(file_words_list, merged_list):
 
     for k in range(len(merged_list)):
         vector.append(my_dict[merged_list[k]])
-    print(vector)
+    print("vector = " + str(vector))
     return vector
 
 
