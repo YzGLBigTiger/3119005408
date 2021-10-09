@@ -1,4 +1,5 @@
 import jieba
+import sys
 
 
 def import_file(file_name):
@@ -10,11 +11,13 @@ def import_file(file_name):
         return file_text
     except IOError as e:
         print(e)
+        sys.exit(1)
 
 
 def jieba_cut(mystr):
     """用jieba分词模块的lcut函数将字符串分词，返回一个列表"""
     mylist = jieba.lcut(mystr)
+    # print("mylist = " + str(mylist))
     return mylist
 
 
@@ -22,12 +25,13 @@ def merge_words(list1, list2):
     """将两个分词后得到的列表不重复地合并成一个列表"""
     new_list = []
     for i in range(len(list1)):
-        new_list.append(list1[i])
+        if list1[i] not in new_list:
+            new_list.append(list1[i])
 
     for j in range(len(list2)):
         if list2[j] not in new_list:
             new_list.append(list2[j])
-
+    # print("new_list = " + str(new_list))
     return new_list
 
 
@@ -44,7 +48,7 @@ def get_vector(file_words_list, merged_list):
 
     for k in range(len(merged_list)):
         vector.append(my_dict[merged_list[k]])
-
+    # print(vector)
     return vector
 
 
@@ -83,4 +87,4 @@ def cal_sim_cosine(file, origin_file):
     # print(result)
     # print(float('%.2f' % result))
 
-    return float('%.2f' % result)
+    return float(result)
