@@ -16,8 +16,10 @@ def main():
         result_file.close
     except IndexError as e:
         print(e)
+        sys.exit(1)
     except IOError as e:
         print(e)
+        sys.exit(1)
 
 
 if __name__ == "__main__":
