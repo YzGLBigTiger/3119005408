@@ -13,7 +13,7 @@ def main():
 
         result_file = open(file_name3, "w", encoding="utf-8")
         result_file.writelines(str(round(result, 2)) + "\n")
-        result_file.close
+        result_file.close()
 
         print("结果请查看" + file_name3 + "文件")
 
