@@ -14,6 +14,9 @@ def main():
         result_file = open(file_name3, "a", encoding="utf-8")
         result_file.writelines(str(result) + "\n")
         result_file.close
+
+        print("结果请查看" + file_name3 + "文件")
+
     except IndexError as e:
         print(e)
         sys.exit(1)
