@@ -12,7 +12,7 @@ class CalSimCosineTest(unittest.TestCase):
         print("单元测试开始：")
 
     def tearDown(self):
-        print("单元测试结束.")
+        print("单元测试结束.\n")
 
     def test_import_file(self):
         self.assertIsNotNone(cal.import_file("测试文本//orig.txt"))
