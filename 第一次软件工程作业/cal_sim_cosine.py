@@ -1,5 +1,4 @@
 import jieba
-import sys
 
 
 def import_file(file_name):
@@ -10,13 +9,13 @@ def import_file(file_name):
         file.close()
 
         if len(file_text) == 0:
-            print(file_name + "文件为空")
-            sys.exit(1)
+            print(file_name + " 文件为空")
+
+        print(file_name + ":\n" + file_text)
 
         return file_text
     except IOError as e:
         print(e)
-        sys.exit(1)
 
 
 # 无效字符，这些字符不应该被记入查重的范围内
@@ -30,11 +29,7 @@ def jieba_cut(mystr):
     # print("mylist = " + str(mylist))
 
     my_list = list(set(jieba_list) - set(invalid_words_list))
-
-    if len(my_list) == 0:
-        print("文章无有效字符！")
-        sys.exit(1)
-
+    print("cut_list = " + str(my_list))
     return my_list
 
 
@@ -87,7 +82,6 @@ def cal_vector_cos(vector1, vector2):
         return result
     except ZeroDivisionError as e:
         print(e)
-        sys.exit(1)
 
 
 def cal_sim_cosine(file, origin_file):
