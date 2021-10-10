@@ -8,21 +8,34 @@ def import_file(file_name):
         file = open(file_name, "r", encoding="utf-8")
         file_text = file.read()
         file.close()
+
+        if len(file_text) == 0:
+            print(file_name + "文件为空")
+            sys.exit(1)
+
         return file_text
     except IOError as e:
         print(e)
         sys.exit(1)
 
 
-def jieba_cut(mystr):
-    """用jieba分词模块的lcut函数将字符串分词，返回一个列表"""
-    mylist = jieba.lcut(mystr)
-    # print("mylist = " + str(mylist))
-    return mylist
-
-
+# 无效字符，这些字符不应该被记入查重的范围内
 invalid_words_list = [',', ' ', '.', '。', '，', '(', '"', ')',
                       '\'', '_', ':', '：', '“', '‘', '\n', '、']
+
+
+def jieba_cut(mystr):
+    """用jieba分词模块的lcut函数将字符串分词，返回一个列表"""
+    jieba_list = jieba.lcut(mystr)
+    # print("mylist = " + str(mylist))
+
+    my_list = list(set(jieba_list) - set(invalid_words_list))
+
+    if len(my_list) == 0:
+        print("文章无有效字符！")
+        sys.exit(1)
+
+    return my_list
 
 
 def merge_words(list1, list2):
@@ -69,8 +82,12 @@ def cal_vector_cos(vector1, vector2):
         num2 += vector1[i] * vector1[i]
         num3 += vector2[i] * vector2[i]
 
-    result = num1 / (num2 ** 0.5 * num3 ** 0.5)
-    return result
+    try:
+        result = num1 / (num2 ** 0.5 * num3 ** 0.5)
+        return result
+    except ZeroDivisionError as e:
+        print(e)
+        sys.exit(1)
 
 
 def cal_sim_cosine(file, origin_file):
