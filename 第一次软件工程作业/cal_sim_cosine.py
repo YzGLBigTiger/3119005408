@@ -11,7 +11,7 @@ def import_file(file_name):
         if len(file_text) == 0:
             print(file_name + " 文件为空")
 
-        print(file_name + ":\n" + file_text)
+        # print(file_name + ":\n" + file_text)
 
         return file_text
     except IOError as e:

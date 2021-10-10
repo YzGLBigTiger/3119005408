@@ -1,15 +1,15 @@
 import unittest
 
 import sys
-sys.path.append("..")
 
+sys.path.append("..")
 
 import cal_sim_cosine as cal
 
-class cal_sim_cosine(unittest.TestCase):
+
+class CalSimCosineTest(unittest.TestCase):
     def setUp(self):
         print("单元测试开始：")
-
 
     def tearDown(self):
         print("单元测试结束.")
@@ -28,3 +28,16 @@ class cal_sim_cosine(unittest.TestCase):
         self.assertEqual(['1', '2'], cal.merge_words(['1', '.'], ['2']))
         self.assertEqual(['1'], cal.merge_words(['1', '.'], []))
         self.assertEqual(['1'], cal.merge_words(['1', '.'], ['1']))
+
+    def test_get_vector(self):
+        self.assertEqual([2, 0], cal.get_vector([1, 1], [1, 0]))
+        self.assertEqual([3, 0], cal.get_vector([1, 1, 1], [1, 0]))
+        self.assertEqual([1, 2, 0], cal.get_vector([0, 1, 1], [0, 1, 2]))
+
+    def test_cal_vector_cos(self):
+        self.assertEqual(1, cal.cal_vector_cos([1, 1, 1], [1, 1, 1]))
+        self.assertEqual(0, cal.cal_vector_cos([0, 1, 9], [3, 0, 0]))
+
+    def test_cal_sim_cossine(self):
+        self.assertEqual(1.0, cal.cal_sim_cosine("测试文本//orig.txt", "测试文本//orig.txt"))
+        self.assertGreater(1.0, cal.cal_sim_cosine("测试文本//orig.txt", "测试文本//orig_0.8_add.txt"))
